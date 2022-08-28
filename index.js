@@ -37,7 +37,9 @@ app.use(express.json());
 
 app.use(requestLogger);
 
-morgan("tiny");
+morgan.token("type", function (req, res) {
+  return req.headers["content-type"];
+});
 
 app.get("/api/persons", (request, response) => {
   response.json(persons);
